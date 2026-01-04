@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { X, ChevronRight } from 'lucide-react';
 
@@ -69,7 +68,9 @@ const Sidebar: React.FC<SidebarProps> = ({ sections, activeSection, isOpen, onCl
               >
                 <div className="flex items-center gap-4">
                   <div className={`${activeSection === section.id ? 'text-white' : 'text-slate-300'}`}>
-                    {React.cloneElement(section.icon as React.ReactElement, { size: 16 })}
+                    {React.isValidElement(section.icon) 
+                      ? React.cloneElement(section.icon as React.ReactElement<any>, { size: 16 }) 
+                      : section.icon}
                   </div>
                   <span>{section.label}</span>
                 </div>

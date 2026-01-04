@@ -1,8 +1,7 @@
-
 import { GoogleGenAI, Type } from "@google/genai";
 
 export async function generateSharkTankCase(userInput: string) {
-  const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+  const ai = new GoogleGenAI({ apiKey: process.env.API_KEY || "" });
   const prompt = `
     Eres un asesor académico de debate económico para DALE Philanthropy. 
     Basado en la siguiente idea de negocio de un estudiante: "${userInput}", 
@@ -40,7 +39,7 @@ export async function generateSharkTankCase(userInput: string) {
       }
     });
 
-    return JSON.parse(response.text);
+    return JSON.parse(response.text ?? "{}");
   } catch (error) {
     console.error("Error generating case:", error);
     throw error;
@@ -48,7 +47,7 @@ export async function generateSharkTankCase(userInput: string) {
 }
 
 export async function analyzeBusinessStrategy(businessDetails: string) {
-  const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+  const ai = new GoogleGenAI({ apiKey: process.env.API_KEY || "" });
   const prompt = `
     Eres un consultor senior de negocios y mentor en DALE Philanthropy. 
     Analiza la siguiente estrategia o negocio (existente o nuevo): "${businessDetails}".
@@ -86,7 +85,7 @@ export async function analyzeBusinessStrategy(businessDetails: string) {
       }
     });
 
-    return JSON.parse(response.text);
+    return JSON.parse(response.text ?? "{}");
   } catch (error) {
     console.error("Error analyzing strategy:", error);
     throw error;
